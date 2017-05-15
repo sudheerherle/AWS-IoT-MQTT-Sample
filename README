@@ -1,3 +1,5 @@
+# AWS-IoT-MQTT-Sample
+
 * Be sure to serve the files from a web service. Opening index.html from local file system will not work when establishing the WebSocket connection.
 * This repository is a part of some of the pages in my website www.sudheerherle.com
 * The index.html is left as-is from the AWSLabs repository https://github.com/awslabs/aws-iot-examples/tree/master/mqttSample with a few declaration
