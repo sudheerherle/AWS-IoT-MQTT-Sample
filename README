@@ -1,1 +1,5 @@
-Be sure to serve the files from a web service. Opening index.html from local file system will not work when establishing the WebSocket connection.
+* Be sure to serve the files from a web service. Opening index.html from local file system will not work when establishing the WebSocket connection.
+* This repository is a part of some of the pages in my website www.sudheerherle.com
+* The index.html is left as-is from the AWSLabs repository https://github.com/awslabs/aws-iot-examples/tree/master/mqttSample with a few declaration
+  specific to my aws endpoints and keys. DO-NOT-COPY the keys, because they are changed to wrong keys deliberately.
+* The demo-switch.html contains code to take control of the LED on the ESP8266 12E development board from the web.
