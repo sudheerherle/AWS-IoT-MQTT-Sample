@@ -141,25 +141,31 @@ function timeSince(date) {
     this.client.on('messageArrived', function(msg){
 //      self.logs.log('messageArrived in ' + self.id);
 //      self.msgs.push(new ReceivedMsg(msg));
-    var myJSON = msg.payloadString;
+    var myJSON = msg.payloadString;  
     var myObj = JSON.parse(myJSON);
-    var myObjdesiredState = myObj.state.desired.state;
+    var myObjdesiredState = myObj.state.desired.motor;
     var text = "turned on ";
     if(myObj.metadata===angular.isUndefinedOrNull ){
        msg.statetimestamp = Date.now()/1000; 
     }
-    else msg.statetimestamp = myObj.metadata.desired.state.timestamp;
+    else msg.statetimestamp = myObj.metadata.desired.motor.timestamp;
     var t1= timeSince(msg.statetimestamp * 1000);
     msg.refreshTimeStamp = myObj.timestamp;    
-    if(myObjdesiredState){
+    if(myObjdesiredState===false){
         text = "turned off ";
         self.client.scope.vm.foo.bar = false;
     }else{
         self.client.scope.vm.foo.bar = true;
     }
     self.client.scope.$apply();
-//    self.client.scope.$digest();
-    self.logs.log('The LED was '+ text + t1 + ' ago.');
+    self.client.scope.$apply(function(){
+//    	$scope.name = "Yasmin";
+//        self.client.scope.vm.foo.bar = true;
+    });
+    
+    
+    self.client.scope.$digest();
+    self.logs.log('The motor was '+ text + t1 + ' ago.');
     
     });
     this.client.on('connected', function(){
@@ -191,11 +197,11 @@ function timeSince(date) {
     this.client.publish(this.topicName, this.message);
   };
   ClientController.prototype.turnon = function() {
-    this.client.publish('$aws/things/demo-switch/shadow/update','{"state": { "desired":{"pin": 2,"state" : 0}  }}');
+    this.client.publish('$aws/things/demo-switch/shadow/update','{"state": { "desired":{"motor": true}  }}');
   };
   
   ClientController.prototype.turnoff = function() {
-    this.client.publish('$aws/things/demo-switch/shadow/update','{"state": { "desired":{"pin": 2,"state" : 1}  }}');
+    this.client.publish('$aws/things/demo-switch/shadow/update','{"state": { "desired":{"motor": false}  }}');
   };
   ClientController.prototype.msgInputKeyUp = function($event) {
     if ($event.keyCode === 13) {
