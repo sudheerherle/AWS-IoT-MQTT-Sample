@@ -128,7 +128,7 @@ function timeSince(date) {
     this.topicName = '$aws/things/demo-switch/shadow/update';
     this.topicShadowGetAccepted = '$aws/things/demo-switch/shadow/get/accepted';
     this.topicShadowGet = '$aws/things/demo-switch/shadow/get';
-    this.message = '{"state": { "desired":{"pin": 2,"state" : 1}  }}';
+    this.message = '{"state": { "desired":{"motor": true}  }}';
     this.msgs = [];
     this.logs = logs;
     var self = this;
@@ -158,13 +158,13 @@ function timeSince(date) {
         self.client.scope.vm.foo.bar = true;
     }
     self.client.scope.$apply();
-    self.client.scope.$apply(function(){
+//    self.client.scope.$apply(function(){
 //    	$scope.name = "Yasmin";
 //        self.client.scope.vm.foo.bar = true;
-    });
+//    });
     
     
-    self.client.scope.$digest();
+//    self.client.scope.$digest();
     self.logs.log('The motor was '+ text + t1 + ' ago.');
     
     });
